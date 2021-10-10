@@ -21,8 +21,8 @@ VS Code extensively. In this case, you can use this script. It checks
 the date of the last modification of each cache folder and if they
 are too old, then they are deleted.
 
-These are cache folders, so even if you delete one by accident, VS Code
-will re-create it.
+(These are cache folders, so even if you delete one by accident, VS Code
+can re-create it.)
 
 Usage
 -----
