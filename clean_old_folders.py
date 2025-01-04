@@ -31,10 +31,10 @@ MB = 1024 * KB
 GB = 1024 * MB
 TB = 1024 * GB
 
-LIMIT = 60    # in days (folders older than this will be deleted)
+LIMIT = 60  # in days (folders older than this will be deleted)
 FNAME = "workspace.json"
 
-DRY_RUN = True    # no folders will be deleted
+DRY_RUN = True  # no folders will be deleted
 # DRY_RUN = False    # Old folders will be DELETED!
 
 
@@ -43,18 +43,18 @@ def sizeof_fmt(size_in_bytes: int) -> str:
     Convert file size (in bytes) to human readable format.
     """
     value: float = size_in_bytes
-    for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
+    for x in ["bytes", "KB", "MB", "GB", "TB"]:
         if value < 1024.0:
             return "{0:.2f} {1}".format(value, x)
         #
         value /= 1024.0
     #
-    return "?"    # for mypy, otherwise we never get here
+    return "?"  # for mypy, otherwise we never get here
 
 
 def folder_size_in_bytes(dir_name: str) -> int:
     root_directory = Path(dir_name)
-    return sum(f.stat().st_size for f in root_directory.glob('**/*') if f.is_file())
+    return sum(f.stat().st_size for f in root_directory.glob("**/*") if f.is_file())
 
 
 def main() -> None:
@@ -66,7 +66,7 @@ def main() -> None:
     for folder in folders:
         fname = Path(f"{folder}/{FNAME}")
         if not fname.is_file():
-            print("Warning: {fname} doesn't exist")
+            print(f"Warning: {fname} doesn't exist")
             continue
         # else
         mtime = datetime.datetime.fromtimestamp(fname.stat().st_mtime)
@@ -86,6 +86,7 @@ def main() -> None:
     if total_size_in_bytes > 0:
         print()
         print(f"Total size of these folders: {sizeof_fmt(total_size_in_bytes)}")
+
 
 ##############################################################################
 
